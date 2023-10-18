@@ -1,0 +1,101 @@
+rite ar#include <Adafruit_NeoPixel.h>
+#define LED1_PIN    2   //pin for strip 1
+#define LED2_PIN    2   //pin for strip 1
+#define LED3_PIN    2   //pin for strip 1
+#define LED4_PIN    2   //pin for strip 1
+#define LED5_PIN    2   //pin for strip 1
+
+#define LED_COUNT 10   //pixel count  
+
+#define switchStep     //Pin for STEP switch other side of switch goes go to ground
+#define switchReset 4   //Pin for RESET switch other side of switch goes to ground
+
+Adafruit_NeoPixel strip1(LED_COUNT, LED1_PIN, NEO_GRBW + NEO_KHZ800);
+Adafruit_NeoPixel strip2(LED_COUNT, LED2_PIN, NEO_GRBW + NEO_KHZ800);
+Adafruit_NeoPixel strip3(LED_COUNT, LED3_PIN, NEO_GRBW + NEO_KHZ800);
+Adafruit_NeoPixel strip4(LED_COUNT, LED4_PIN, NEO_GRBW + NEO_KHZ800);
+Adafruit_NeoPixel strip5(LED_COUNT, LED5_PIN, NEO_GRBW + NEO_KHZ800);
+
+
+int step_ = 0;
+int reset = 0;
+int frame = 0; 
+int Pix[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+int color[] = {0,0,0,0}
+
+
+
+
+void setup() {
+  strip1.begin();
+  strip1.show();
+  strip2.begin();
+  strip2.show();
+  strip3.begin();
+  strip3.show();
+  strip4.begin();
+  strip4.show();
+  strip5.begin();
+  strip5.show();
+  
+  pinMode(switchStep, INPUT_PULLUP);
+  pinMode(switchReset, INPUT_PULLUP);
+
+  BS1 = digitalRead(switchUP);
+  BS2 = digitalRead(switchDOWN);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+  cBtn();  //Gets the button presses.
+
+  switch (step_) {   //This is the step we are in for the dress.
+    case 0:
+  
+  frame++;
+  }
+}
+
+void setColor(color, strip){    // Sets color of specifies strip with specified color
+  for(i=0; i<10; i++) {
+    strip.setPixelColor(Pix[i], color[0], color[1], color[2], color[3]);
+  }  
+  
+}
+
+void chaseColor(color, strip, _speed, _direction){     //Has a strip do a chase with a color at a speed in a direction
+
+
+}
+
+
+
+void cBtn() {
+  int valA =  digitalRead(switchStep);
+  int valB =  digitalRead(switchReset);
+  delay(10);
+  int valAA = digitalRead(switchStep);
+  int valBB = digitalRead(switchReset);
+
+  if (valA == valAA) {
+    if (valA != BS1) {
+      if (valA == LOW) {
+        step_++;
+      }
+    }
+  }
+
+  if (valB == valBB) {
+    if (valB != BS2) {
+      if (valB == LOW) {
+        step_= 0;
+        }
+      }
+    }
+  }
+
+  BS1 = valA;
+  BS2 = valB;
+}
