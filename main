@@ -2,10 +2,10 @@
 
 #include <Adafruit_NeoPixel.h>
 #define LED1_PIN    2   //pin for strip 1
-#define LED2_PIN    3   //pin for strip 1
-#define LED3_PIN    4   //pin for strip 1
-#define LED4_PIN    5   //pin for strip 1
-#define LED5_PIN    6   //pin for strip 1
+#define LED2_PIN    3   //pin for strip 2
+#define LED3_PIN    4   //pin for strip 3
+#define LED4_PIN    5   //pin for strip 4
+#define LED5_PIN    6   //pin for strip 5
 
 #define LED_COUNT 10   //pixel count  
 
