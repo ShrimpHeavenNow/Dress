@@ -1,4 +1,6 @@
-rite ar#include <Adafruit_NeoPixel.h>
+
+
+#include <Adafruit_NeoPixel.h>
 #define LED1_PIN    2   //pin for strip 1
 #define LED2_PIN    2   //pin for strip 1
 #define LED3_PIN    2   //pin for strip 1
@@ -7,7 +9,7 @@ rite ar#include <Adafruit_NeoPixel.h>
 
 #define LED_COUNT 10   //pixel count  
 
-#define switchStep     //Pin for STEP switch other side of switch goes go to ground
+#define switchState 3    //Pin for STEP switch other side of switch goes go to ground
 #define switchReset 4   //Pin for RESET switch other side of switch goes to ground
 
 Adafruit_NeoPixel strip1(LED_COUNT, LED1_PIN, NEO_GRBW + NEO_KHZ800);
@@ -16,15 +18,22 @@ Adafruit_NeoPixel strip3(LED_COUNT, LED3_PIN, NEO_GRBW + NEO_KHZ800);
 Adafruit_NeoPixel strip4(LED_COUNT, LED4_PIN, NEO_GRBW + NEO_KHZ800);
 Adafruit_NeoPixel strip5(LED_COUNT, LED5_PIN, NEO_GRBW + NEO_KHZ800);
 
-
-int step_ = 0;
+int BS1;
+int BS2;
+int state = 0;
 int reset = 0;
 int frame = 0; 
 int Pix[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-int color[] = {0,0,0,0}
+int color[] = {0,0,0,0};
+Adafruit_NeoPixel strips[] = {strip1, strip2, strip3, strip4, strip5};
+
+int red[] = {255,0,0};
+int green[] = {0,255,0};
+int blue[] = {0,0,255};
+int white[] = {255,255,255};
 
 
-
+//TODO: Make for loops dynamic. Make Chase. Make other Effects.
 
 void setup() {
   strip1.begin();
@@ -38,11 +47,11 @@ void setup() {
   strip5.begin();
   strip5.show();
   
-  pinMode(switchStep, INPUT_PULLUP);
+  pinMode(switchState, INPUT_PULLUP);
   pinMode(switchReset, INPUT_PULLUP);
 
-  BS1 = digitalRead(switchUP);
-  BS2 = digitalRead(switchDOWN);
+  BS1 = digitalRead(switchState);
+  BS2 = digitalRead(switchReset);
 
 }
 
@@ -51,38 +60,84 @@ void loop() {
 
   cBtn();  //Gets the button presses.
 
-  switch (step_) {   //This is the step we are in for the dress.
+  switch (state) {   //This is the step we are in for the dress.
     case 0:
+      stepOne(0);
+      break;
+
+    case 1:
+      stepTwo(1);
+      break;
   
   frame++;
   }
 }
 
-void setColor(color, strip){    // Sets color of specifies strip with specified color
-  for(i=0; i<10; i++) {
-    strip.setPixelColor(Pix[i], color[0], color[1], color[2], color[3]);
+void setColor(int color[], Adafruit_NeoPixel _strip) {    // Sets color of specifies strip with specified color
+  for(int i = 0; i<10; i++) {
+    _strip.setPixelColor(Pix[i], color[0], color[1], color[2], color[3]);
   }  
   
 }
 
-void chaseColor(color, strip, _speed, _direction){     //Has a strip do a chase with a color at a speed in a direction
+void chaseColor(int color, Adafruit_NeoPixel strip, int _speed, int _direction){     //Has a strip do a chase with a color at a speed in a direction
+  
+    //Make the dang thing.
+
+}
+
+void stepOne(int _state) {
+
+  //in this area, we run through things to do once.
+  
+  for (int i = 0; i <4; i++){
+    setColor(red, strips[i]);
+  }
+
+  
+  while(true){   
+    cBtn();  //Make sure this is still the step we're in.
+     if (state != _state){
+      return; // leave if it's not.
+      }
+
+      // in this area we do things that happen over and over
+  } 
+}
 
 
+
+void stepTwo(int _state) {
+
+  //in this area, we run through things to do once.
+  
+  for (int i = 0; i <4; i++){
+    setColor(red, strips[i]);
+  }
+  
+  while(true){   
+    cBtn();  //Make sure this is still the step we're in.
+     if (state != _state){
+      return; // leave if it's not.
+      }
+
+      // in this area we do things that happen over and over
+  }  
 }
 
 
 
 void cBtn() {
-  int valA =  digitalRead(switchStep);
+  int valA =  digitalRead(switchState);
   int valB =  digitalRead(switchReset);
   delay(10);
-  int valAA = digitalRead(switchStep);
+  int valAA = digitalRead(switchState);
   int valBB = digitalRead(switchReset);
 
   if (valA == valAA) {
     if (valA != BS1) {
       if (valA == LOW) {
-        step_++;
+        state++;
       }
     }
   }
@@ -90,12 +145,10 @@ void cBtn() {
   if (valB == valBB) {
     if (valB != BS2) {
       if (valB == LOW) {
-        step_= 0;
+        state= 0;
         }
       }
     }
-  }
-
   BS1 = valA;
   BS2 = valB;
-}
+  }
