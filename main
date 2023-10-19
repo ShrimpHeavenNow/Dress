@@ -80,9 +80,26 @@ void setColor(int color[], Adafruit_NeoPixel _strip) {    // Sets color of speci
   
 }
 
-void chaseColor(int color, Adafruit_NeoPixel strip, int _speed, int _direction){     //Has a strip do a chase with a color at a speed in a direction
+void chaseColor(int color[], Adafruit_NeoPixel strip, int _speed, int _direction int size){     //Has a strip do a chase with a color at a speed in a direction
   
-    //Make the dang thing.
+    // Make the dang thing.
+
+    // We need to establish what the values should be.
+    // These will depend on the size. so if we have a size of 0, it's just one pixel.
+    // A size of 1 will do one pixel to either side of the main pixel
+    // So if that was the case, the middle pixel would be at 100% and either side would be 50%
+    // If it were size 2, the middle would be 100%, the next out would be 75% and the next would be 25%, etc.
+        // I was thinking we could even do different curves aside from this linear one, but that's a future problem.
+
+    // We set these values as a target value
+    // we take the current value and proportionally move it towards the target value
+    // This is determined by the _speed
+    // Once they're at those values, set new values and fade to those.
+
+  for(int i =0; i<10; i++;){
+    _strip.setPixelColor(Pix[i], color[0], color[1], color[2], color[3]);
+  
+  }
 
 }
 
