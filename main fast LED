@@ -4,11 +4,15 @@
 #define NUM_STRIPS 5
 #define NUM_LEDS_PER_STRIP 10
 #define BTN_PIN   13
-#define RST_PIN   12   
+#define RST_PIN   12
+#define RELAY_ONE_PIN 7
+#define RELAY_TWO_PIN 8
+
 
 bool reset = false;
 bool useOrange = false;
 int pattern = 0;
+int wavePasssed = 0;
 
 CRGB leds[NUM_STRIPS][NUM_LEDS_PER_STRIP];
 
@@ -60,7 +64,8 @@ void setup() {
   btn.attachClick(nextPattern);
   rst.attachClick(patOff);
 
-  //Fill the colorIndex array with random numbers
+  pinMode(RELAY_ONE_PIN, OUTPUT);
+  pinMode(RELAY_TWO_PIN, OUTPUT);
   
 }
 
@@ -77,7 +82,12 @@ void loop() {
       stepOne();
       break;
     case 2:
-      stepTwo();
+      stepOne();
+      digitalWrite(RELAY_ONE_PIN, HIGH);
+      break;
+    case 3:
+      stepOne();
+      digitalWrite(RELAY_TWO_PIN, HIGH);
       break;
   }
 
@@ -126,7 +136,7 @@ void stepOne() {
     useOrange = !useOrange;
   }
   
-  EVERY_N_MILLISECONDS(5){
+  EVERY_N_MILLISECONDS(5){   //Find a way to make this one strip at a time once. Right now I have to poop too bad to concentrate.
     for (int i = 0; i < NUM_LEDS_PER_STRIP; i++) {
       colorIndex[i]++;
     }
