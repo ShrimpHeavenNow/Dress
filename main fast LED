@@ -19,21 +19,21 @@ CRGB leds[NUM_STRIPS][NUM_LEDS_PER_STRIP];
 uint8_t colorIndex[NUM_LEDS_PER_STRIP];
 uint8_t whichPalette = 0;
 
-DEFINE_GRADIENT_PALETTE( redWave_gp ) { 
+DEFINE_GRADIENT_PALETTE( redWave_gp ) { //TODO: Make this actually a red Wave
     0,    0,  194,  255,     //light blue
    46,    3,    0,  246,     //dark blue
   176,   55,  222,   70,     //bright green
   255,    0,  194,  255      //light blue
 };
 
-DEFINE_GRADIENT_PALETTE( orangeWave_gp ) { 
+DEFINE_GRADIENT_PALETTE( orangeWave_gp ) {  //TODO: Make this actually an orange Wave
     0,  255,  100,    0,     //orange
    90,  255,    0,  255,     //magenta
   150,  255,  100,    0,     //orange
   255,  255,  100,    0      //orange
 };
 
-DEFINE_GRADIENT_PALETTE( redOrange_gp ) { 
+DEFINE_GRADIENT_PALETTE( redOrange_gp ) {  //TODO: Make this actually a red/ orange Wave
     0,    6,  255,    0,     //green
    71,    0,  255,  153,     //bluegreen
   122,  200,  200,  200,     //gray
