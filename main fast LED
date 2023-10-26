@@ -13,6 +13,7 @@ bool reset = false;
 bool useOrange = false;
 int pattern = 0;
 int wavePasssed = 0;
+bool firstOn = true;
 
 CRGB leds[NUM_STRIPS][NUM_LEDS_PER_STRIP];
 
@@ -109,12 +110,19 @@ void patOff() {
 }
 
 void debug() {
-  reset = false;
-  for (int i = 0; i < NUM_STRIPS; i++){
+
+  if (firstOn == true){
+for (int i = 0; i < NUM_STRIPS; i++){
     for (int x = 0; x < NUM_LEDS_PER_STRIP; x++){
       fill_solid(leds[i], NUM_LEDS_PER_STRIP, CRGB::Blue); //Just a Placeholder;
-  }
+
+          }
+        }
+firstOn = false;
+delay(1);
 }
+  reset = false;
+  
 }
 
 void stepOne() {
