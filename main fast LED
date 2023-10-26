@@ -46,7 +46,7 @@ CRGBPalette16 targetPalette(redWave_gp);
 CRGBPalette16 redOrange(redOrange_gp);
 
 OneButton btn = OneButton(BTN_PIN, true, true);
-OneButton rst = OneButton(RST_PIN, true, true);
+//OneButton rst = OneButton(RST_PIN, true, true);
 
 void setup() {
   FastLED.addLeds<NEOPIXEL, 2>(leds[0], NUM_LEDS_PER_STRIP);
@@ -62,7 +62,7 @@ void setup() {
 
 
   btn.attachClick(nextPattern);
-  rst.attachClick(patOff);
+  //rst.attachClick(patOff);
 
   pinMode(RELAY_ONE_PIN, OUTPUT);
   pinMode(RELAY_TWO_PIN, OUTPUT);
@@ -92,7 +92,7 @@ void loop() {
   }
 
   btn.tick();
-  rst.tick();
+  //rst.tick();
   FastLED.show();
 }
 
