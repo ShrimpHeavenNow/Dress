@@ -119,7 +119,7 @@ for (int i = 0; i < NUM_STRIPS; i++){
           }
         }
 FastLED.show();
-delay(1000);
+delay(100);
 firstOn = false;
 }
   reset = false;
