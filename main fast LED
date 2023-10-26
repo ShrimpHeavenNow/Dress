@@ -104,6 +104,8 @@ void nextPattern(){
 
 void patOff() {
   reset = true;
+  digitalWrite(RELAY_ONE_PIN, LOW);
+  digitalWrite(RELAY_TWO_PIN, LOW);
 }
 
 void debug() {
