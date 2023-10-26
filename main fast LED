@@ -118,6 +118,7 @@ for (int i = 0; i < NUM_STRIPS; i++){
 
           }
         }
+FastLED.show();
 delay(1000);
 firstOn = false;
 }
@@ -125,6 +126,7 @@ firstOn = false;
   for (int i = 0; i < NUM_STRIPS; i++){
     for (int x = 0; x < NUM_LEDS_PER_STRIP; x++){
       fill_solid(leds[i], NUM_LEDS_PER_STRIP, CRGB::Black); //Just a Placeholder;
+
 
           }
         }
