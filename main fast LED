@@ -62,7 +62,7 @@ void setup() {
 
 
   btn.attachClick(nextPattern);
-  //rst.attachClick(patOff);
+  rst.attachClick(patOff);
 
   pinMode(RELAY_ONE_PIN, OUTPUT);
   pinMode(RELAY_TWO_PIN, OUTPUT);
@@ -71,7 +71,7 @@ void setup() {
 
 
 void loop() {
-  if (reset = true){
+  if (reset == true){
     pattern = 0;
   }
   switch (pattern) {
@@ -92,7 +92,7 @@ void loop() {
   }
 
   btn.tick();
-  //rst.tick();
+  rst.tick();
   FastLED.show();
 }
 
