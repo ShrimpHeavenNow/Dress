@@ -121,8 +121,8 @@ void stepOne() {
   for (int i = 0; i < NUM_STRIPS; i++){
     for (int x = 0; x < NUM_LEDS_PER_STRIP; x++){
       fill_solid(leds[i], NUM_LEDS_PER_STRIP, CRGB::Red); //Just a Placeholder;
-}
-}
+            }
+        }
 
 
   for (int x = 0; x < NUM_STRIPS; x++){         // this will come after the wave and just twinkle in the red/ orange pallette
