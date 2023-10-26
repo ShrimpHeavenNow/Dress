@@ -133,6 +133,8 @@ void stepOne() {
 
   FastLED.show();
 }
+}
+}
 
 void twinkleOrangRed(){
 
