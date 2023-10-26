@@ -119,7 +119,7 @@ for (int i = 0; i < NUM_STRIPS; i++){
           }
         }
 firstOn = false;
-delay(100);
+delay(1000);
 }
   reset = false;
   for (int i = 0; i < NUM_STRIPS; i++){
