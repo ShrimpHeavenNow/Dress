@@ -111,8 +111,10 @@ void patOff() {
 void debug() {
   reset = false;
   for (int i = 0; i < NUM_STRIPS; i++){
-    fill_solid(leds[i], NUM_LEDS_PER_STRIP, CRGB::Blue); //Just a Placeholder;
+    for (int x = 0; x < NUM_LEDS_PER_STRIP; x++){
+    fill_solid(leds[i][x], NUM_LEDS_PER_STRIP, CRGB::Blue); //Just a Placeholder;
   }
+}
 }
 
 void stepOne() {
