@@ -118,8 +118,8 @@ for (int i = 0; i < NUM_STRIPS; i++){
 
           }
         }
-firstOn = false;
 delay(1000);
+firstOn = false;
 }
   reset = false;
   for (int i = 0; i < NUM_STRIPS; i++){
