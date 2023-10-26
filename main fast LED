@@ -5,8 +5,8 @@
 #define NUM_LEDS_PER_STRIP 10
 #define BTN_PIN   13
 #define RST_PIN   12
-#define RELAY_ONE_PIN 7
-#define RELAY_TWO_PIN 8
+#define RELAY_ONE_PIN A0
+#define RELAY_TWO_PIN A1
 
 
 bool reset = false;
@@ -118,6 +118,9 @@ void debug() {
 }
 
 void stepOne() {
+  for (int i = 0; i < NUM_STRIPS; i++){
+    for (int x = 0; x < NUM_LEDS_PER_STRIP; x++){
+      fill_solid(leds[i], NUM_LEDS_PER_STRIP, CRGB::Red); //Just a Placeholder;
 
 
   for (int x = 0; x < NUM_STRIPS; x++){         // this will come after the wave and just twinkle in the red/ orange pallette
@@ -125,41 +128,6 @@ void stepOne() {
       leds[x][i] = ColorFromPalette(redOrange, colorIndex[i]);
     }
   }
-  
-
-  nblendPaletteTowardPalette( currentPalette, targetPalette, 10 );
-
-
-  if (useOrange = true){
-      targetPalette = orangeWave_gp;
-  }else{
-      targetPalette = redWave_gp;
-  }
-
-  EVERY_N_SECONDS(1) {
-    useOrange = !useOrange;
-  }
-  
-  EVERY_N_MILLISECONDS(5){   //Find a way to make this one strip at a time once. Right now I have to poop too bad to concentrate.
-    for (int i = 0; i < NUM_LEDS_PER_STRIP; i++) {
-      colorIndex[i]++;
-    }
-  }
-        //This Mother fucker. We will use this to adapt the red/ orange waves up the whole thing ONCE, leaving this twinkle behind.
-            // This outer loop will go over each strip, one at a time
-            //   for(int x = 0; x < NUM_STRIPS; x++) {
-            //     // This inner loop will go over each led in the current strip, one at a time
-            //     for(int i = 0; i < NUM_LEDS_PER_STRIP; i++) {
-            //       leds[x][i] = CRGB::Red;
-            //       FastLED.show();
-            //       leds[x][i] = CRGB::Black;
-            //       delay(100);
-            //     }
-            //   }
-            // }
-
-      //add a thing to have every LED behind the wave star the twinkle function, or something.
- 
 
 
 
