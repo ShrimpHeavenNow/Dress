@@ -199,7 +199,7 @@ EVERY_N_MILLISECONDS(10){ //fade up each pixel that wants to fade up
 
 
   for(int x = 0; x < NUM_LEDS_PER_STRIP; x++){
-    if (fadingUp[x][1] == 255){
+    if (fadingUp[x][1] == 254){
       twinkling[x] = x;
       myBrainHurts++;
       Serial.print("we added soemthing to twinkle");
