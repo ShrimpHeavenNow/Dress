@@ -36,6 +36,7 @@ int doneStrips[] = {-1,-1,-1,-1,-1};
 int myBrainHurts = 0;
 
 
+
 CRGB leds[NUM_STRIPS][NUM_LEDS_PER_STRIP];
 
 
@@ -165,6 +166,14 @@ for (int x = 0; x < NUM_STRIPS; x++){
 }
 
 void stepOne() {
+
+int allDone = 0;
+for( int x = 0; x < NUM_STRIPS; x++){
+allDone = allDone + doneStrips[x];
+}
+
+if (allDone < 0){
+ 
   
   EVERY_N_SECONDS(1){ //Add a pixel to the list of pixels fading up.
     found = false;
@@ -225,7 +234,7 @@ EVERY_N_MILLISECONDS(10){ //fade up each pixel that wants to fade up
           
           } 
         }
-
+}
   // Color each pixel from the palette using the index from colorIndex[]
   for (int x = 0; x < NUM_STRIPS; x++){
     if (doneStrips[x] == 0)
