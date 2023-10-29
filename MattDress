@@ -147,6 +147,18 @@ firstOn = false;
 
           }
         }
+stripWeAreOn= 0;
+        for( int x =0; x < NUM_LEDS_PER_STRIP; x++){
+          fadingUpDumb[x] = -1;
+          twinkling[x] = -1;
+          fadingUp[x][0] = -1;
+          fadingUp[x][-1] = 0;
+          Serial.print("we reset and advanced");
+          }
+for (int x = 0; x < NUM_STRIPS; x++){
+ doneStrips[x] = -1;
+}
+
 }
 
 void stepOne() {
