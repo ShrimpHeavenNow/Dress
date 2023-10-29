@@ -16,6 +16,7 @@ int wavePasssed = 0;
 bool firstOn = true;
 bool found = false;
 
+
 int fadingUpDumb[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
 int fadingUp[10][2] = {
   {-1,0},
@@ -32,6 +33,7 @@ int fadingUp[10][2] = {
 int twinkling[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
 int stripWeAreOn = 0;
 int doneStrips[] = {-1,-1,-1,-1,-1};
+int myBrainHurts = 0;
 
 
 CRGB leds[NUM_STRIPS][NUM_LEDS_PER_STRIP];
@@ -198,6 +200,7 @@ EVERY_N_MILLISECONDS(10){ //fade up each pixel that wants to fade up
   for(int x = 0; x < NUM_LEDS_PER_STRIP; x++){
     if (fadingUp[x][1] == 255){
       twinkling[x] = x;
+      myBrainHurts++;
       Serial.print("we added soemthing to twinkle");
     }  //right now, the whole strip will stay at the end of red wave until the entire strip is there and then it will twinkle
  
@@ -205,13 +208,9 @@ EVERY_N_MILLISECONDS(10){ //fade up each pixel that wants to fade up
 
 //check if the whole strip is 255
 
-int myBrainHurts = 0;
 
-    for(int x = 0; x < NUM_LEDS_PER_STRIP; x++){
-      if (twinkling[x] != -1){
-        myBrainHurts++ ;
-      } 
-    }
+
+   
       if (myBrainHurts == NUM_LEDS_PER_STRIP){ // if the strip is done with the wave, flag it as done, move onto the next strip, and reset the twinking and fading.
         doneStrips[stripWeAreOn] = 0;
         stripWeAreOn++;
