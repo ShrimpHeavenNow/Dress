@@ -155,6 +155,7 @@ void stepOne() {
         if (twinkling[i] != -1){
           fadingUpDumb[i] = i;
           fadingUp[i][0] =  i;  //adds it to the fading up list
+          Serial.print("we got to the add pixel part");
           break;
          }
       }
@@ -168,6 +169,7 @@ EVERY_N_MILLISECONDS(10){ //fade up each pixel that wants to fade up
       leds[stripWeAreOn][x] = ColorFromPalette( redWave, colorIndex[fadingUp[x][1]]);
       if(fadingUp[x][1] < 255){
         fadingUp[x][1]++;
+        Serial.print("we got to the fade pixel part");
       }
     }
   }
@@ -177,6 +179,7 @@ EVERY_N_MILLISECONDS(10){ //fade up each pixel that wants to fade up
   for(int x = 0; x < NUM_LEDS_PER_STRIP; x++){
     if (fadingUp[x][1] == 255){
       twinkling[x] = x;
+      Serial.print("we added soemthing to twinkle");
     }  //right now, the whole strip will stay at the end of red wave until the entire strip is there and then it will twinkle
  
     }
@@ -198,6 +201,7 @@ int myBrainHurts = 0;
           twinkling[x] = -1;
           fadingUp[x][0] = -1;
           fadingUp[x][-1] = 0;
+          Serial.print("we reset and advanced");
           } 
         }
 
