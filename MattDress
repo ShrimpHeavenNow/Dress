@@ -212,7 +212,7 @@ EVERY_N_MILLISECONDS(10){ //fade up each pixel that wants to fade up
 
 
    
-      if (myBrainHurts == NUM_LEDS_PER_STRIP){ // if the strip is done with the wave, flag it as done, move onto the next strip, and reset the twinking and fading.
+      if (myBrainHurts >= NUM_LEDS_PER_STRIP){ // if the strip is done with the wave, flag it as done, move onto the next strip, and reset the twinking and fading.
         doneStrips[stripWeAreOn] = 0;
         stripWeAreOn++;
         myBrainHurts = 0;
