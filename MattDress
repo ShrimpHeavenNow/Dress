@@ -208,7 +208,7 @@ EVERY_N_MILLISECONDS(10){ //fade up each pixel that wants to fade up
 int myBrainHurts = 0;
 
     for(int x = 0; x < NUM_LEDS_PER_STRIP; x++){
-      if (twinkle[x] != -1){
+      if (twinkling[x] != -1){
         myBrainHurts++ ;
       } 
     }
