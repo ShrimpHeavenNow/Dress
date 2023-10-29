@@ -14,6 +14,7 @@ bool redOrange = false;
 int pattern = 0;
 int wavePasssed = 0;
 bool firstOn = true;
+bool found = false;
 
 int fadingUpDumb[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
 int fadingUp[10][2] = {
@@ -152,18 +153,21 @@ firstOn = false;
 void stepOne() {
   
   EVERY_N_SECONDS(1){ //Add a pixel to the list of pixels fading up.
+    found = false;
     for (int i = 0;  i < NUM_LEDS_PER_STRIP; i++){
-      if (fadingUpDumb[i] == -1){
-        if (twinkling[i] != -1){
-          fadingUpDumb[i] = i;
-          fadingUp[i][0] =  i;  //adds it to the fading up list
-          Serial.print("we got to the add pixel part");
-          break;
-         }
-      }
+      if (found == false){
+        if (fadingUpDumb[i] == -1){
+          if (twinkling[i] != -1){
+            fadingUpDumb[i] = i;
+            fadingUp[i][0] =  i;  //adds it to the fading up list
+            Serial.print("we got to the add pixel part");
+            found = true;
+            }
+          }
 
+        }
     }
-}
+  }
 
 EVERY_N_MILLISECONDS(10){ //fade up each pixel that wants to fade up 
   for(int x = 0; x < NUM_LEDS_PER_STRIP; x++){
