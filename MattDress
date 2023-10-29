@@ -153,7 +153,7 @@ stripWeAreOn= 0;
           twinkling[x] = -1;
           fadingUp[x][0] = -1;
           fadingUp[x][-1] = 0;
-          Serial.print("we reset and advanced");
+          Serial.print("we reset from debug");
           }
 for (int x = 0; x < NUM_STRIPS; x++){
  doneStrips[x] = -1;
