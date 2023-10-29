@@ -212,7 +212,7 @@ int myBrainHurts = 0;
         myBrainHurts++ ;
       } 
     }
-      if (myBrainHurts == NUM_STRIPS){ // if the strip is done with the wave, flag it as done, move onto the next strip, and reset the twinking and fading.
+      if (myBrainHurts == NUM_LEDS_PER_STRIP){ // if the strip is done with the wave, flag it as done, move onto the next strip, and reset the twinking and fading.
         doneStrips[stripWeAreOn] = 0;
         stripWeAreOn++;
         for( int x =0; x < NUM_LEDS_PER_STRIP; x++){
