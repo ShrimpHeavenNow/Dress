@@ -164,9 +164,9 @@ void stepOne() {
 
 EVERY_N_MILLISECONDS(10){ //fade up each pixel that wants to fade up 
   for(int x = 0; x < NUM_LEDS_PER_STRIP; x++){
-    if (fadingUp[x][1] != -1){
+    if (fadingUp[x][0] != -1){
       leds[stripWeAreOn][x] = ColorFromPalette( redWave, colorIndex[fadingUp[x][1]]);
-      if(fadingUp[x][1] <= 255){
+      if(fadingUp[x][1] < 255){
         fadingUp[x][1]++;
       }
     }
@@ -174,7 +174,6 @@ EVERY_N_MILLISECONDS(10){ //fade up each pixel that wants to fade up
 }
 
 
-//check if anything in the fading up is 255. if it is, add it to the twinkling array.
   for(int x = 0; x < NUM_LEDS_PER_STRIP; x++){
     if (fadingUp[x][1] == 255){
       twinkling[x] = x;
