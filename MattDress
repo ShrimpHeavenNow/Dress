@@ -89,6 +89,8 @@ void setup() {
 }
 
 void loop() {
+  Serial.print("loop!");
+  
   if (reset == true){
     pattern = 0;
   }
