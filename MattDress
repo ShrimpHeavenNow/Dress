@@ -149,7 +149,7 @@ firstOn = false;
 
 void stepOne() {
   
-  EVERY_N_MILLISECONDS(100){ //Add a pixel to the list of pixels fading up.
+  EVERY_N_SECONDS(1){ //Add a pixel to the list of pixels fading up.
     for (int i = 0;  i < NUM_LEDS_PER_STRIP; i++){
       if (fadingUp[i] == -1){
         if (twinkling[i] != -1){
