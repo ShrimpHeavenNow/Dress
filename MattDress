@@ -173,7 +173,7 @@ void stepOne() {
   }
 
 EVERY_N_MILLISECONDS(10){ //fade up each pixel that wants to fade up
-  Serial.print("we got to the fade pixel part"); //confimed we get here
+  //Serial.print("we got to the fade pixel part"); //confimed we get here
   for(int x = 0; x < NUM_LEDS_PER_STRIP; x++){
     if (fadingUp[x][0] != -1){
       leds[stripWeAreOn][x] = ColorFromPalette( redWave, fadingUp[x][1]);
