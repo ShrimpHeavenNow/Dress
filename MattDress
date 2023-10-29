@@ -81,13 +81,10 @@ void setup() {
   pinMode(RELAY_ONE_PIN, OUTPUT);
   pinMode(RELAY_TWO_PIN, OUTPUT);
   
+
   //Fill the colorIndex array with random numbers
  for (int i = 0; i < NUM_LEDS_PER_STRIP; i++) {
-   colorIndex[i] = 0;
- }
-  //Fill the colorIndex array with random numbers
- for (int i = 0; i < NUM_LEDS_PER_STRIP; i++) {
-   colorIndex2[i] = random8();
+   colorIndex[i] = random8();
  }
 }
 
@@ -219,12 +216,12 @@ int myBrainHurts = 0;
   for (int x = 0; x < NUM_STRIPS; x++){
     if (doneStrips[x] == 0)
     for (int i = 0; i < NUM_LEDS_PER_STRIP; i++) {
-      leds[x][i] = ColorFromPalette(smolder, colorIndex2[i]);
+      leds[x][i] = ColorFromPalette(smolder, colorIndex[i]);
     }
   }
   EVERY_N_MILLISECONDS(10){
     for (int i = 0; i < NUM_LEDS_PER_STRIP; i++) {
-      colorIndex2[i]++;
+      colorIndex[i]++;
     }
   }
   FastLED.show();
