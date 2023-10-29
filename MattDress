@@ -89,7 +89,6 @@ void setup() {
 }
 
 void loop() {
-  Serial.print("loop!");
   
   if (reset == true){
     pattern = 0;
@@ -133,7 +132,7 @@ void debug() {
   if (firstOn == true){
 for (int i = 0; i < NUM_STRIPS; i++){
     for (int x = 0; x < NUM_LEDS_PER_STRIP; x++){
-      fill_solid(leds[i], NUM_LEDS_PER_STRIP, CRGB::Blue); //Just a Placeholder;
+      fill_solid(leds[i][x], NUM_LEDS_PER_STRIP, CRGB::Blue); //Just a Placeholder;
 
           }
         }
@@ -143,7 +142,7 @@ firstOn = false;
   reset = false;
   for (int i = 0; i < NUM_STRIPS; i++){
     for (int x = 0; x < NUM_LEDS_PER_STRIP; x++){
-      fill_solid(leds[i], NUM_LEDS_PER_STRIP, CRGB::Black); //Just a Placeholder;
+      fill_solid(leds[i][x], NUM_LEDS_PER_STRIP, CRGB::Black); //Just a Placeholder;
 
           }
         }
