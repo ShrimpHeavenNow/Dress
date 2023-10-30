@@ -15,6 +15,7 @@ int pattern = 0;
 int wavePasssed = 0;
 bool firstOn = true;
 bool found = false;
+int currentIndex [] = {0,0,0,0,0,0,0,0,0,0}
 
 
 int fadingUpDumb[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -239,12 +240,16 @@ EVERY_N_MILLISECONDS(10){ //fade up each pixel that wants to fade up
   for (int x = 0; x < NUM_STRIPS; x++){
     if (doneStrips[x] == 0)
     for (int i = 0; i < NUM_LEDS_PER_STRIP; i++) {
-      leds[x][i] = ColorFromPalette(smolder, colorIndex[i]);
+      leds[x][i] = ColorFromPalette(smolder, currentIndex[i]);
     }
   }
   EVERY_N_MILLISECONDS(10){
     for (int i = 0; i < NUM_LEDS_PER_STRIP; i++) {
       colorIndex[i]++;
+      currentIndex[i]++;
+      if(currentIndex[i] != colorIndex[i]){
+        currentIndex[i]++; //This is a dirty trick to get the smoulder to not jump to the index value, but fade to it.
+      }
     }
   }
   FastLED.show();
