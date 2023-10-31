@@ -176,7 +176,7 @@ allDone = allDone + doneStrips[x];
 if (allDone < 0){
  
   
-  EVERY_N_SECONDS(1){ //Add a pixel to the list of pixels fading up.
+  EVERY_N_MILLISECONDS(500){ //Add a pixel to the list of pixels fading up.
     found = false;
     Serial.print("we got to the add pixel part");
     for (int i = 0;  i < NUM_LEDS_PER_STRIP; i++){
