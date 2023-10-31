@@ -209,9 +209,8 @@ EVERY_N_MILLISECONDS(10){ //fade up each pixel that wants to fade up
 
 
   for(int x = 0; x < NUM_LEDS_PER_STRIP; x++){
-    if (fadingUp[x][1] == 254){
-      twinkling[x] = x;
-      myBrainHurts++;
+    if (fadingUp[x][1] == 255){
+      twinkling[x] = 0;
       Serial.print("we added soemthing to twinkle");
     }  //right now, the whole strip will stay at the end of red wave until the entire strip is there and then it will twinkle
  
@@ -219,10 +218,12 @@ EVERY_N_MILLISECONDS(10){ //fade up each pixel that wants to fade up
 
 //check if the whole strip is 255
 
-
+for( int x = 0; x < NUM_LEDS_PER_STRIP; x++){
+mrBrainHurts = myBrainHurts + doneStrips[x];
+}
 
    
-      if (myBrainHurts >= NUM_LEDS_PER_STRIP){ // if the strip is done with the wave, flag it as done, move onto the next strip, and reset the twinking and fading.
+      if (myBrainHurts < 0){ // if the strip is done with the wave, flag it as done, move onto the next strip, and reset the twinking and fading.
         doneStrips[stripWeAreOn] = 0;
         stripWeAreOn++;
         myBrainHurts = 0;
