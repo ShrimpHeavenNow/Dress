@@ -125,6 +125,14 @@ void nextPattern(){
 
 }
 
+int checkIf16(strip){ //This will check if we are on strip #4 and return 16.
+if (strip == 4){
+  return 16;
+} else {
+  return 10;  
+}
+}
+
 void patOff() {
   reset = true;
   digitalWrite(RELAY_ONE_PIN, LOW);
