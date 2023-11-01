@@ -217,7 +217,8 @@ EVERY_N_MILLISECONDS(10){ //fade up each pixel that wants to fade up
     }
 
 //check if the whole strip is 255
-
+  
+mrBrainHurts = 0;
 for( int x = 0; x < NUM_LEDS_PER_STRIP; x++){
 mrBrainHurts = myBrainHurts + doneStrips[x];
 }
