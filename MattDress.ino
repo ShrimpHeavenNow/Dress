@@ -15,7 +15,8 @@ int pattern = 0;
 int wavePasssed = 0;
 bool firstOn = true;
 bool found = false;
-int currentIndex [] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
+
+uint8_t currentIndex [] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 
 
 int fadingUpDumb[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
