@@ -16,7 +16,7 @@ int wavePasssed = 0;
 bool firstOn = true;
 bool found = false;
 
-uint8_t currentIndex [] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+uint8_t currentIndex [] = {128,128,128,128,128,128,128,128,128,128,128,128,128,128};
 
 
 int fadingUpDumb[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -283,10 +283,14 @@ void stepOne() {
     for (int i = 0; i < NUM_LEDS_PER_STRIP; i++) {
       colorIndex[i]++;
       currentIndex[i]++;
-      if(currentIndex[i] != colorIndex[i]){
+      
+    }
+   EVERY_N_MILLISECONDS(50){
+    
+    if(currentIndex[i] != colorIndex[i]){
         currentIndex[i]++; //This is a dirty trick to get the smoulder to not jump to the index value, but fade to it.
       }
-    }
+   }
   }
   FastLED.show();
 }
