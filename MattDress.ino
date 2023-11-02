@@ -19,8 +19,12 @@ bool found = false;
 uint8_t currentIndex [] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 
-int fadingUpDumb[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+int fadingUpDumb[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
 int fadingUp[10][2] = {
+  {-1,0},
+  {-1,0},
+  {-1,0},
+  {-1,0},
   {-1,0},
   {-1,0},
   {-1,0},
@@ -32,7 +36,7 @@ int fadingUp[10][2] = {
   {-1,0},
   {-1,0}
   } ; //the first value is the position, the second is the pallette index.
-int twinkling[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+int twinkling[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 int stripWeAreOn = 0;
 int doneStrips[] = {-1,-1,-1,-1,-1};
 int myBrainHurts = 0;
@@ -69,7 +73,7 @@ void setup() {
   FastLED.addLeds<NEOPIXEL, 3>(leds[1], NUM_LEDS_PER_STRIP);
   FastLED.addLeds<NEOPIXEL, 4>(leds[2], NUM_LEDS_PER_STRIP);
   FastLED.addLeds<NEOPIXEL, 5>(leds[3], NUM_LEDS_PER_STRIP);
-  FastLED.addLeds<NEOPIXEL, 6>(leds[3], 16);
+  FastLED.addLeds<NEOPIXEL, 6>(leds[4], 16);
 
 
   FastLED.setBrightness(255);
@@ -158,16 +162,14 @@ void debug() {  //this runs the first time we power on and after a reset and aft
   myBrainHurts = 0; //starts resetting variables.
   stripWeAreOn= 0;
     
-  for( int x =0; x < NUM_LEDS_PER_STRIP; x++){
+  for( int x =0; x < 16; x++){
             fadingUpDumb[x] = -1;
             fadingUp[x][0] = -1;
             fadingUp[x][-1] = 0;
+            twinkling[x] = 0;
             //Serial.print("we reset from debug");
             }
             
-  for (int i =0; i < 16; i++){
-    twinkling[i] = 0;
-    }
           
   for (int x = 0; x < NUM_STRIPS; x++){
    doneStrips[x] = -1;
@@ -205,7 +207,7 @@ void stepOne() {
 
   EVERY_N_MILLISECONDS(10){ //fade up each pixel that wants to fade up
     //Serial.print("we got to the fade pixel part"); //confimed we get here
-    for(int x = 0; x < NUM_LEDS_PER_STRIP; x++){
+    for(int x = 0; x < checkIf16; x++){
       if (fadingUp[x][0] != -1){
         leds[stripWeAreOn][x] = ColorFromPalette( redWave, fadingUp[x][1]);
         if(fadingUp[x][1] < 254){
@@ -217,7 +219,7 @@ void stepOne() {
   }
 
 
-  for(int x = 0; x < NUM_LEDS_PER_STRIP; x++){  //checks if an led is at 255 and if so, set it to the twinkle array.
+  for(int x = 0; x < checkIf16(stripWeAreOn); x++){  //checks if an led is at 255 and if so, set it to the twinkle array.
     if (fadingUp[x][1] == 255){
       twinkling[x] = 1;
       Serial.print("we added soemthing to twinkle");
