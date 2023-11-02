@@ -1,7 +1,7 @@
 #include "FastLED.h"
 #include <OneButton.h>
 
-#define NUM_STRIPS 4
+#define NUM_STRIPS 5
 #define NUM_LEDS_PER_STRIP 10
 #define BTN_PIN   12
 #define RST_PIN   13
@@ -68,7 +68,8 @@ void setup() {
   FastLED.addLeds<NEOPIXEL, 2>(leds[0], NUM_LEDS_PER_STRIP);
   FastLED.addLeds<NEOPIXEL, 3>(leds[1], NUM_LEDS_PER_STRIP);
   FastLED.addLeds<NEOPIXEL, 4>(leds[2], NUM_LEDS_PER_STRIP);
-  FastLED.addLeds<NEOPIXEL, 5>(leds[3], 16);
+  FastLED.addLeds<NEOPIXEL, 5>(leds[3], NUM_LEDS_PER_STRIP);
+  FastLED.addLeds<NEOPIXEL, 6>(leds[3], 16);
 
 
   FastLED.setBrightness(255);
@@ -123,8 +124,8 @@ void nextPattern(){ //this happend when the next button is pressed.
 }
 
 int checkIf16(int strip){ //This will check if we are on strip #4 and return 16 if we are. 10 if we are not.
-  if (strip == 3){
-    return 16;
+  if (strip == 4){
+    return 14;
   } else {
     return 10;  
     }
@@ -161,10 +162,10 @@ void debug() {  //this runs the first time we power on and after a reset and aft
             fadingUpDumb[x] = -1;
             fadingUp[x][0] = -1;
             fadingUp[x][-1] = 0;
-            Serial.print("we reset from debug");
+            //Serial.print("we reset from debug");
             }
             
-  for (int i =0; i < 15; i++){
+  for (int i =0; i < 16; i++){
     twinkling[i] = 0;
     }
           
@@ -220,6 +221,7 @@ void stepOne() {
     if (fadingUp[x][1] == 255){
       twinkling[x] = 1;
       Serial.print("we added soemthing to twinkle");
+      Serial.print(x);
     }  //right now, the whole strip will stay at the end of red wave until the entire strip is there and then it will twinkle
  
     }
