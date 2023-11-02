@@ -97,7 +97,7 @@ void setup() {
       Serial.println(x);
       Serial.println("This is checking the checkif16");
     }
-    delay(5000)
+    delay(5000);
 }
 
 void loop() {
@@ -195,7 +195,7 @@ void stepOne() {
 
  
 
-Serial.println("we got to 1");
+//Serial.println("we got to 1");
      
  EVERY_N_SECONDS(1){ //Add a pixel to the list of pixels fading up.
     found = false;
@@ -216,7 +216,7 @@ Serial.println("we got to 1");
     }
   }
 
-Serial.println("we got to 2");
+//Serial.println("we got to 2");
 
   EVERY_N_MILLISECONDS(10){ //fade up each pixel that wants to fade up
     //Serial.println("we got to the fade pixel part"); //confimed we get here
@@ -235,7 +235,7 @@ Serial.println("we got to 2");
   }
 
 
-Serial.println("we got to 3");
+//Serial.println("we got to 3");
 
   for(int x = 0; x < checkIf16(stripWeAreOn); x++){  //checks if an led is at 255 and if so, set it to the twinkle array.
     if (fadingUp[x][1] == 255){
@@ -246,7 +246,7 @@ Serial.println("we got to 3");
  
     }
 
-Serial.println("we got to 4");
+//Serial.println("we got to 4");
     
   int myBrainHurts = 0; //this should have it be either 10 or 16
   for( int x = 0; x < checkIf16(stripWeAreOn); x++){
@@ -268,7 +268,7 @@ Serial.println("we got to 4");
         }
   }
 
-  Serial.println("we got to 5");
+ // Serial.println("we got to 5");
   
   // Color each pixel from the palette using the index from colorIndex[]
   for (int x = 0; x < NUM_STRIPS; x++){
