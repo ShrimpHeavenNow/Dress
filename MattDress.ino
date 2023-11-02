@@ -144,7 +144,7 @@ void patOff() {  //This happens when the reset button is pressed
 void debug() {  //this runs the first time we power on and after a reset and after power on until the next button is pressed.
 
   if (firstOn == true){ //if it's the first time we are on, be blue for 1 second.
-    Serial.print("First On!");
+    Serial.println("First On!");
       for (int i = 0; i < NUM_STRIPS; i++){
           fill_solid(leds[i], checkIf16(i), CRGB::Blue); 
             }
@@ -167,7 +167,7 @@ void debug() {  //this runs the first time we power on and after a reset and aft
             fadingUp[x][0] = -1;
             fadingUp[x][-1] = 0;
             twinkling[x] = 0;
-            //Serial.print("we reset from debug");
+            //Serial.println("we reset from debug");
             }
             
           
@@ -187,18 +187,18 @@ void stepOne() {
   if (allDone < 0){
  
 
-Serial.print("we got to 1");
+Serial.println("we got to 1");
      
  EVERY_N_SECONDS(1){ //Add a pixel to the list of pixels fading up.
     found = false;
-    Serial.print("we got to the add pixel part");
+    Serial.println("we got to the add pixel part");
     for (int i = 0;  i < checkIf16(stripWeAreOn); i++){
       if (found == false){
         if (fadingUpDumb[i] == -1){
           if (twinkling[i] == 0){
             fadingUpDumb[i] = 0;
             fadingUp[i][0] =  0;  //adds it to the fading up list
-            Serial.print("we got to the add pixel part farts farts farts");
+            Serial.println("we got to the add pixel part farts farts farts");
             found = true;
             }
           }
@@ -207,34 +207,34 @@ Serial.print("we got to 1");
     }
   }
 
-Serial.print("we got to 2")
+Serial.println("we got to 2");
 
   EVERY_N_MILLISECONDS(10){ //fade up each pixel that wants to fade up
-    //Serial.print("we got to the fade pixel part"); //confimed we get here
+    //Serial.println("we got to the fade pixel part"); //confimed we get here
     for(int x = 0; x < checkIf16; x++){
       if (fadingUp[x][0] != -1){
         leds[stripWeAreOn][x] = ColorFromPalette( redWave, fadingUp[x][1]);
         if(fadingUp[x][1] < 254){
           fadingUp[x][1]++;
-          Serial.print("we got to the fade pixel part farts farts farts");
+          Serial.println("we got to the fade pixel part farts farts farts");
         }
       }
     }
   }
 
 
-Serial.print("we got to 3")
+Serial.println("we got to 3");
 
   for(int x = 0; x < checkIf16(stripWeAreOn); x++){  //checks if an led is at 255 and if so, set it to the twinkle array.
     if (fadingUp[x][1] == 255){
       twinkling[x] = 1;
-      Serial.print("we added soemthing to twinkle");
-      Serial.print(x);
+      Serial.println("we added soemthing to twinkle");
+      Serial.println(x);
     }  //right now, the whole strip will stay at the end of red wave until the entire strip is there and then it will twinkle
  
     }
 
-Serial.print("we got to 4")
+Serial.println("we got to 4");
     
   int myBrainHurts = 0; //this should have it be either 10 or 16
   for( int x = 0; x < checkIf16(stripWeAreOn); x++){
@@ -245,7 +245,7 @@ Serial.print("we got to 4")
       if (myBrainHurts == checkIf16(stripWeAreOn)){ // if the strip is done with the wave, flag it as done, move onto the next strip, and reset the twinking and fading.
         doneStrips[stripWeAreOn] = 0;
 
-        Serial.print("we reset and advanced");
+        Serial.printlnln("we reset and advanced");
         for( int x =0; x < checkIf16(stripWeAreOn); x++){
           fadingUpDumb[x] = -1;
           twinkling[x] = 0;
@@ -256,7 +256,7 @@ Serial.print("we got to 4")
         }
   }
 
-  Serial.print("we got to 5")
+  Serial.println("we got to 5");
   
   // Color each pixel from the palette using the index from colorIndex[]
   for (int x = 0; x < NUM_STRIPS; x++){
