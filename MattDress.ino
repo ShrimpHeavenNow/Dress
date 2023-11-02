@@ -162,7 +162,7 @@ void debug() {  //this runs the first time we power on and after a reset and aft
   myBrainHurts = 0; //starts resetting variables.
   stripWeAreOn= 0;
     
-  for( int x =0; x < 16; x++){
+  for( int x =0; x < 14; x++){
             fadingUpDumb[x] = -1;
             fadingUp[x][0] = -1;
             fadingUp[x][-1] = 0;
