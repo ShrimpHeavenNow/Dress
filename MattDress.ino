@@ -185,6 +185,13 @@ void stepOne() {
   }
   
   if (allDone < 0){
+
+for(int x = 0; x < checkIf16(stripWeAreOn); x++){  //checks if an led is at 255 and if so, set it to the twinkle array.
+      Serial.println(x);
+      Serial.println("This is checking the checkif16");
+    }
+int q;
+cin >> q;
  
 
 Serial.println("we got to 1");
