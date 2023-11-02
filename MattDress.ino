@@ -226,6 +226,7 @@ void stepOne() {
         if(fadingUp[x][1] < 254){
           fadingUp[x][1]++;
         }else{
+          twinkling[x] = 1;
           Serial.println(x);
           Serial.println("is at 255");
           //Serial.println("we got to the fade pixel part farts farts farts");
@@ -237,14 +238,14 @@ void stepOne() {
 
 //Serial.println("we got to 3");
 
-  for(int x = 0; x < checkIf16(stripWeAreOn); x++){  //checks if an led is at 255 and if so, set it to the twinkle array.
-    if (fadingUp[x][1] == 255){
-      twinkling[x] = 1;
-      Serial.println(x);
-      Serial.println("we added soemthing to twinkle");
-    }  //right now, the whole strip will stay at the end of red wave until the entire strip is there and then it will twinkle
- 
-    }
+//  for(int x = 0; x < checkIf16(stripWeAreOn); x++){  //checks if an led is at 255 and if so, set it to the twinkle array.
+//    if (fadingUp[x][1] == 255){
+//      twinkling[x] = 1;
+//      Serial.println(x);
+//      Serial.println("we added soemthing to twinkle");
+//    }  //right now, the whole strip will stay at the end of red wave until the entire strip is there and then it will twinkle
+// 
+//    }
 
 //Serial.println("we got to 4");
     
