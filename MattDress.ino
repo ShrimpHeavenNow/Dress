@@ -16,11 +16,11 @@ int wavePasssed = 0;
 bool firstOn = true;
 bool found = false;
 
-uint8_t currentIndex [] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+uint8_t currentIndex [] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 
 int fadingUpDumb[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
-int fadingUp[10][2] = {
+int fadingUp[14][2] = {
   {-1,0},
   {-1,0},
   {-1,0},
@@ -43,10 +43,10 @@ int myBrainHurts = 0;
 
 
 
-CRGB leds[NUM_STRIPS][16]; //this might work?
+CRGB leds[NUM_STRIPS][14]; //this might work?
 
 
-uint8_t colorIndex[16];
+uint8_t colorIndex[14];
 
 DEFINE_GRADIENT_PALETTE( redWave_gp ) {
   0,    0,  0,  0,     //Black
@@ -73,7 +73,7 @@ void setup() {
   FastLED.addLeds<NEOPIXEL, 3>(leds[1], NUM_LEDS_PER_STRIP);
   FastLED.addLeds<NEOPIXEL, 4>(leds[2], NUM_LEDS_PER_STRIP);
   FastLED.addLeds<NEOPIXEL, 5>(leds[3], NUM_LEDS_PER_STRIP);
-  FastLED.addLeds<NEOPIXEL, 6>(leds[4], 16);
+  FastLED.addLeds<NEOPIXEL, 6>(leds[4], 14);
 
 
   FastLED.setBrightness(255);
@@ -89,7 +89,7 @@ void setup() {
   
 
   //Fill the colorIndex array with random numbers
- for (int i = 0; i < 16; i++) {
+ for (int i = 0; i < 14; i++) {
    colorIndex[i] = random8();
  }
 }
@@ -186,7 +186,9 @@ void stepOne() {
   
   if (allDone < 0){
  
-  
+
+Serial.print("we got to 1");
+     
  EVERY_N_SECONDS(1){ //Add a pixel to the list of pixels fading up.
     found = false;
     Serial.print("we got to the add pixel part");
@@ -194,8 +196,8 @@ void stepOne() {
       if (found == false){
         if (fadingUpDumb[i] == -1){
           if (twinkling[i] == 0){
-            fadingUpDumb[i] = i;
-            fadingUp[i][0] =  i;  //adds it to the fading up list
+            fadingUpDumb[i] = 0;
+            fadingUp[i][0] =  0;  //adds it to the fading up list
             Serial.print("we got to the add pixel part farts farts farts");
             found = true;
             }
@@ -204,6 +206,8 @@ void stepOne() {
         }
     }
   }
+
+Serial.print("we got to 2")
 
   EVERY_N_MILLISECONDS(10){ //fade up each pixel that wants to fade up
     //Serial.print("we got to the fade pixel part"); //confimed we get here
@@ -219,6 +223,8 @@ void stepOne() {
   }
 
 
+Serial.print("we got to 3")
+
   for(int x = 0; x < checkIf16(stripWeAreOn); x++){  //checks if an led is at 255 and if so, set it to the twinkle array.
     if (fadingUp[x][1] == 255){
       twinkling[x] = 1;
@@ -228,6 +234,7 @@ void stepOne() {
  
     }
 
+Serial.print("we got to 4")
     
   int myBrainHurts = 0; //this should have it be either 10 or 16
   for( int x = 0; x < checkIf16(stripWeAreOn); x++){
@@ -249,7 +256,7 @@ void stepOne() {
         }
   }
 
-  
+  Serial.print("we got to 5")
   
   // Color each pixel from the palette using the index from colorIndex[]
   for (int x = 0; x < NUM_STRIPS; x++){
