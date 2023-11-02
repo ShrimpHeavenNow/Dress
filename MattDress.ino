@@ -200,7 +200,7 @@ void stepOne() {
  EVERY_N_SECONDS(1){ //Add a pixel to the list of pixels fading up.
     found = false;
     //Serial.println("we got to the add pixel part");
-    for (int i = 0;  i < checkIf16(stripWeAreOn); i++){
+    for (int i = 0;  i < 10); i++){
       if (found == false){
         if (fadingUpDumb[i] == -1){
           if (twinkling[i] == 0){
@@ -220,7 +220,7 @@ void stepOne() {
 
   EVERY_N_MILLISECONDS(10){ //fade up each pixel that wants to fade up
     //Serial.println("we got to the fade pixel part"); //confimed we get here
-    for(int x = 0; x < checkIf16; x++){
+    for(int x = 0; x < 10; x++){
       if (fadingUp[x][0] == 0){
         leds[stripWeAreOn][x] = ColorFromPalette( redWave, fadingUp[x][1]);
         if(fadingUp[x][1] < 254){
@@ -250,7 +250,7 @@ void stepOne() {
 //Serial.println("we got to 4");
     
   int myBrainHurts = 0; //this should have it be either 10 or 16
-  for( int x = 0; x < checkIf16(stripWeAreOn); x++){
+  for( int x = 0; x < 14); x++){
     myBrainHurts = myBrainHurts + twinkling[x]; //if everything is twinkling, it should be either 10 or 16.
     }
 
