@@ -16,7 +16,7 @@ int wavePasssed = 0;
 bool firstOn = true;
 bool found = false;
 
-uint8_t currentIndex [] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
+uint8_t currentIndex [] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 
 int fadingUpDumb[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -122,7 +122,7 @@ void nextPattern(){ //this happend when the next button is pressed.
 
 }
 
-int checkIf16(strip){ //This will check if we are on strip #4 and return 16 if we are. 10 if we are not.
+int checkIf16(int strip){ //This will check if we are on strip #4 and return 16 if we are. 10 if we are not.
   if (strip == 3){
     return 16;
   } else {
@@ -184,7 +184,7 @@ void stepOne() {
   if (allDone < 0){
  
   
- EVERY_N_MILLISECONDS(500){ //Add a pixel to the list of pixels fading up.
+ EVERY_N_SECONDS(1){ //Add a pixel to the list of pixels fading up.
     found = false;
     Serial.print("we got to the add pixel part");
     for (int i = 0;  i < checkIf16(stripWeAreOn); i++){
@@ -225,9 +225,9 @@ void stepOne() {
     }
 
     
-  mrBrainHurts = checkIf16(stripWeAreOn); this should have it be either 10 or 16
+  int myBrainHurts = checkIf16(stripWeAreOn); //this should have it be either 10 or 16
   for( int x = 0; x < checkIf16(stripWeAreOn); x++){
-    mrBrainHurts = myBrainHurts + twinkle[x]; //if everything is twinkling, it should be either 10 or 16.
+    myBrainHurts = myBrainHurts + twinkling[x]; //if everything is twinkling, it should be either 10 or 16.
     }
 
    
