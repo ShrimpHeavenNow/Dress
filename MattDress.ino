@@ -251,7 +251,7 @@ void stepOne() {
 //Serial.println("we got to 4");
     
   int myBrainHurts = 0; //this should have it be either 10 or 16
-  for( int x = 0; x < 14); x++){
+  for( int x = 0; x < 14; x++){
     myBrainHurts = myBrainHurts + twinkling[x]; //if everything is twinkling, it should be either 10 or 16.
     }
 
