@@ -166,7 +166,7 @@ void debug() {  //this runs the first time we power on and after a reset and aft
     }
         
   myBrainHurts = 0; //starts resetting variables.
-  stripWeAreOn= 0;
+  stripWeAreOn = 0;
     
   for( int x =0; x < 14; x++){
             fadingUpDumb[x] = -1;
@@ -200,14 +200,14 @@ void stepOne() {
  EVERY_N_SECONDS(1){ //Add a pixel to the list of pixels fading up.
     found = false;
     //Serial.println("we got to the add pixel part");
-    for (int i = 0;  i < 10); i++){
+    for (int i = 0;  i < 10; i++){
       if (found == false){
         if (fadingUpDumb[i] == -1){
           if (twinkling[i] == 0){
             fadingUpDumb[i] = 0;
             fadingUp[i][0] =  0;  //adds it to the fading up list
-            Serial.println(i); 
-            Serial.println("we got to the add pixel part farts farts farts"); 
+//            Serial.println(i); 
+//            Serial.println("we got to the add pixel part farts farts farts"); 
             found = true;
             }
           }
@@ -225,11 +225,12 @@ void stepOne() {
         leds[stripWeAreOn][x] = ColorFromPalette( redWave, fadingUp[x][1]);
         if(fadingUp[x][1] < 254){
           fadingUp[x][1]++;
-        }else{
-          twinkling[x] = 1;
-          Serial.println(x);
-          Serial.println("is at 255");
-          //Serial.println("we got to the fade pixel part farts farts farts");
+          }else{
+            twinkling[x] = 1;
+            fadingUp[x][0] = -1;
+            Serial.println(x);
+            Serial.println("is at 255");
+            //Serial.println("we got to the fade pixel part farts farts farts");
         }
       }
     }
