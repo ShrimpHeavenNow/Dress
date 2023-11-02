@@ -216,7 +216,10 @@ Serial.println("we got to 2");
         leds[stripWeAreOn][x] = ColorFromPalette( redWave, fadingUp[x][1]);
         if(fadingUp[x][1] < 254){
           fadingUp[x][1]++;
-          Serial.println("we got to the fade pixel part farts farts farts");
+        }else{
+          Serial.println(x);
+          Serial.println("is at 255");
+          //Serial.println("we got to the fade pixel part farts farts farts");
         }
       }
     }
@@ -245,7 +248,7 @@ Serial.println("we got to 4");
       if (myBrainHurts == checkIf16(stripWeAreOn)){ // if the strip is done with the wave, flag it as done, move onto the next strip, and reset the twinking and fading.
         doneStrips[stripWeAreOn] = 0;
 
-        Serial.printlnln("we reset and advanced");
+        Serial.println("we reset and advanced");
         for( int x =0; x < checkIf16(stripWeAreOn); x++){
           fadingUpDumb[x] = -1;
           twinkling[x] = 0;
