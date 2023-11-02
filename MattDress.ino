@@ -227,7 +227,7 @@ void stepOne() {
     }
 
     
-  int myBrainHurts = checkIf16(stripWeAreOn); //this should have it be either 10 or 16
+  int myBrainHurts = 0; //this should have it be either 10 or 16
   for( int x = 0; x < checkIf16(stripWeAreOn); x++){
     myBrainHurts = myBrainHurts + twinkling[x]; //if everything is twinkling, it should be either 10 or 16.
     }
