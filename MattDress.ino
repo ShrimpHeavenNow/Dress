@@ -115,11 +115,9 @@ void loop() {
     case 2:
       stepOne();
       digitalWrite(RELAY_ONE_PIN, HIGH);
-      break;
-    case 3:
-      stepOne();
       digitalWrite(RELAY_TWO_PIN, HIGH);
       break;
+ 
   }
 
   btn.tick();
@@ -197,7 +195,7 @@ void stepOne() {
 
 //Serial.println("we got to 1");
      
- EVERY_N_SECONDS(1){ //Add a pixel to the list of pixels fading up.
+ EVERY_N_MILLISECONDS(500){ //Add a pixel to the list of pixels fading up.
     found = false;
     //Serial.println("we got to the add pixel part");
     for (int i = 0;  i < 10; i++){
