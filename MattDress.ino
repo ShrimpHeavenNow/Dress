@@ -300,7 +300,7 @@ EVERY_N_MILLISECONDS(10){  //Changing this time makes the smoulder faster or slo
     
   }
 
-   EVERY_N_MILLISECONDS(80){  //Changing this time changes how quickly the strip moved into the smouldering effect after the wave.
+   EVERY_N_MILLISECONDS(80){  //Changing this time changes how quickly the strip moves into the smouldering effect after the wave.
     for (int i = 0; i < NUM_LEDS_PER_STRIP; i++) {
       for (int x  = 0; x < NUM_STRIPS; x++){
         if (doneStrips[x] == 0){
