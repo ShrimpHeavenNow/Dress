@@ -1,3 +1,8 @@
+/* ============================ This Bad Boi =================================
+ * This code has a wave of leds pass through 5 different strips once and once 
+ * the wave has passed, it starts doing a smouldering effect.
+ * =========================================================================== */
+
 #include "FastLED.h"
 #include <OneButton.h>
 
@@ -17,7 +22,7 @@ bool firstOn = true;
 bool found = false;
 bool what = false;
 
-uint8_t currentIndex [5][14] = {
+uint8_t currentIndex [5][14] = {  //The end of the wave is the same as the middle of the smouldering look, so after the wave ends, we start here.
   {128,128,128,128,128,128,128,128,128,128,128,128,128,128},
   {128,128,128,128,128,128,128,128,128,128,128,128,128,128},
   {128,128,128,128,128,128,128,128,128,128,128,128,128,128},
