@@ -15,6 +15,7 @@ int pattern = 0;
 int wavePasssed = 0;
 bool firstOn = true;
 bool found = false;
+bool what = false;
 
 uint8_t currentIndex [] = {128,128,128,128,128,128,128,128,128,128,128,128,128,128};
 
@@ -38,7 +39,7 @@ int fadingUp[14][2] = {
   } ; //the first value is the position, the second is the pallette index.
 int twinkling[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 int stripWeAreOn = 0;
-int doneStrips[] = {-1,-1,-1,-1,-1};
+int doneStrips[] = {-1,-1,-1,-1,-1,0};
 int myBrainHurts = 0;
 
 
@@ -143,6 +144,7 @@ void patOff() {  //This happens when the reset button is pressed
   reset = true;
   digitalWrite(RELAY_ONE_PIN, LOW);
   digitalWrite(RELAY_TWO_PIN, LOW);
+  Serial.println("Reset Pressed.");
 }
 
 void debug() {  //this runs the first time we power on and after a reset and after power on until the next button is pressed.
@@ -150,9 +152,11 @@ void debug() {  //this runs the first time we power on and after a reset and aft
   if (firstOn == true){ //if it's the first time we are on, be blue for 1 second.
     Serial.println("First On!");
       for (int i = 0; i < NUM_STRIPS; i++){
-          fill_solid(leds[i], checkIf16(i), CRGB::Blue); 
-            }
-     delay(1000);
+      fill_solid(leds[i], checkIf16(i), CRGB::Blue); //makes everything black.
+
+    }
+    FastLED.show();
+     delay(500);
     firstOn = false; 
     }
     
@@ -178,7 +182,7 @@ void debug() {  //this runs the first time we power on and after a reset and aft
   for (int x = 0; x < NUM_STRIPS; x++){
    doneStrips[x] = -1;
     }
- 
+  
   }
 
 void stepOne() {
@@ -187,7 +191,6 @@ void stepOne() {
   for( int x = 0; x < NUM_STRIPS; x++){
   allDone = allDone + doneStrips[x];
   }
-  
   if (allDone < 0){
 
 
@@ -196,29 +199,49 @@ void stepOne() {
 //Serial.println("we got to 1");
      
  EVERY_N_MILLISECONDS(500){ //Add a pixel to the list of pixels fading up.
+    Serial.println("Strip we are on:");
+    Serial.println(stripWeAreOn);
+    Serial.println(checkIf16(stripWeAreOn));
+    Serial.println("");
+    Serial.println("Done Strips:");
+    for (int x = 0; x < NUM_STRIPS; x++){
+      Serial.println(doneStrips[x]);
+    }
+    
+
+
+
     found = false;
-    //Serial.println("we got to the add pixel part");
-    for (int i = 0;  i < 10; i++){
+    for (int i = 0;  i < checkIf16(stripWeAreOn); i++){
       if (found == false){
         if (fadingUpDumb[i] == -1){
           if (twinkling[i] == 0){
             fadingUpDumb[i] = 0;
             fadingUp[i][0] =  0;  //adds it to the fading up list
-//            Serial.println(i); 
-//            Serial.println("we got to the add pixel part farts farts farts"); 
+            Serial.println("we added");
+            Serial.println(i);
+            Serial.println(""); 
             found = true;
             }
           }
 
         }
     }
+    
   }
 
 //Serial.println("we got to 2");
 
   EVERY_N_MILLISECONDS(10){ //fade up each pixel that wants to fade up
-    //Serial.println("we got to the fade pixel part"); //confimed we get here
-    for(int x = 0; x < 10; x++){
+    if (stripWeAreOn == 4){
+        Serial.println("4 10 and 14 are:");
+        Serial.println(fadingUp[9][1]);
+        Serial.println(fadingUp[13][1]);
+        Serial.println("");
+    }
+  
+
+    for(int x = 0; x < checkIf16(stripWeAreOn); x++){
       if (fadingUp[x][0] == 0){
         leds[stripWeAreOn][x] = ColorFromPalette( redWave, fadingUp[x][1]);
         if(fadingUp[x][1] < 254){
@@ -226,8 +249,11 @@ void stepOne() {
           }else{
             twinkling[x] = 1;
             fadingUp[x][0] = -1;
+            Serial.println("Strip:");
+            Serial.println(stripWeAreOn);
             Serial.println(x);
             Serial.println("is at 255");
+            Serial.println("");
             //Serial.println("we got to the fade pixel part farts farts farts");
         }
       }
@@ -249,29 +275,39 @@ void stepOne() {
 //Serial.println("we got to 4");
     
   int myBrainHurts = 0; //this should have it be either 10 or 16
-  for( int x = 0; x < 14; x++){
-    myBrainHurts = myBrainHurts + twinkling[x]; //if everything is twinkling, it should be either 10 or 16.
+  for( int x = 0; x < checkIf16(stripWeAreOn); x++){
+    myBrainHurts = myBrainHurts + twinkling[x]; //if everything is twinkling, it should be either 10 or 14.
     }
 
-   
-      if (myBrainHurts == checkIf16(stripWeAreOn)){ // if the strip is done with the wave, flag it as done, move onto the next strip, and reset the twinking and fading.
-        doneStrips[stripWeAreOn] = 0;
-
-        Serial.println("we reset and advanced");
-        for( int x =0; x < checkIf16(stripWeAreOn); x++){
-          fadingUpDumb[x] = -1;
-          twinkling[x] = 0;
-          fadingUp[x][0] = -1;
-          fadingUp[x][-1] = 0;
-          }
-         stripWeAreOn++;
+  
+    if (myBrainHurts == checkIf16(stripWeAreOn)){ // if the strip is done with the wave, flag it as done, move onto the next strip, and reset the twinking and fading.
+      what = true;
+      Serial.println("we reset and advanced");
+      Serial.println(stripWeAreOn);
+      for( int x =0; x < checkIf16(stripWeAreOn); x++){
+        fadingUpDumb[x] = -1;
+        twinkling[x] = 0;
+        fadingUp[x][0] = -1;
+        fadingUp[x][-1] = 0;
         }
+
+
+        Serial.println("New Strip:");
+        Serial.println(stripWeAreOn);
+      }
+  if(what == true){
+    Serial.println("this strip is beign added to done:");
+    Serial.println(stripWeAreOn);
+    doneStrips[stripWeAreOn] = 0;
+    stripWeAreOn++;
+    what = false;  
   }
+}
 
  // Serial.println("we got to 5");
   
   // Color each pixel from the palette using the index from colorIndex[]
-  for (int x = 0; x < NUM_STRIPS; x++){
+  for (int x = 0; x < 5; x++){
     if (doneStrips[x] == 0)
     for (int i = 0; i < checkIf16(x); i++) {
       leds[x][i] = ColorFromPalette(smolder, currentIndex[i]);
@@ -284,10 +320,11 @@ void stepOne() {
       
     }
    EVERY_N_MILLISECONDS(50){
-    
+    for (int i = 0; i < NUM_LEDS_PER_STRIP; i++) {
     if(currentIndex[i] != colorIndex[i]){
         currentIndex[i]++; //This is a dirty trick to get the smoulder to not jump to the index value, but fade to it.
       }
+   }
    }
   }
   FastLED.show();
